@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const restaurantRoute = require('./routes/restaurant');
+const restaurantRoute = require('../routes/restaurant');
 // const aiRoute = require('./routes/restaurants');
 
 
