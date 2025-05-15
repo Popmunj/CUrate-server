@@ -13,6 +13,7 @@ try {
   });
 
   const db = getFirestore();
+  console.log('db fetched');
   module.exports = db;
 
 } catch (err) {
