@@ -44,7 +44,7 @@ router.get('/', async (req, res) => {
       all.push({id: doc.id, ...data});
     });
     res.json(all);
-    
+
   }
 
   } catch (err) {
@@ -59,6 +59,23 @@ router.get('/test', (req, res) => {
   res.json({ message: 'Test route works!' });
 });
 
+router.get('/names', async (req, res) =>{
+  try {
+    let query = db.collection('restaurant');
+
+    let all = [];
+    const snapshot = await query.get();
+    snapshot.forEach(doc => {
+      const data = doc.data();
+      all.push({id: doc.id, name: data.name});
+    });
+    res.json(all);
+
+
+  } catch (err) {
+    console.error('Error fetching restaurants:', err);
+    res.status(500).json({ error: 'Failed to fetch data' });}
+})
 
 
 
