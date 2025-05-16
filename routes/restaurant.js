@@ -48,7 +48,7 @@ router.get('/', async (req, res) => {
   }
 
   } catch (err) {
-    console.error('Error fetching restaurants:', err);
+    console.error(err);
     res.status(500).json({ error: 'Failed to fetch data' });
   }
 
@@ -69,11 +69,13 @@ router.get('/names', async (req, res) =>{
       const data = doc.data();
       all.push({id: doc.id, name: data.name});
     });
+
     res.json(all);
 
 
+
   } catch (err) {
-    console.error('Error fetching restaurants:', err);
+    console.error(err);
     res.status(500).json({ error: 'Failed to fetch data' });}
 })
 

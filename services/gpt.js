@@ -16,9 +16,13 @@ const getNames = async () => {
     try {
         let names = ''
         const res = await axios.get(process.env.ROOT + '/names');
-        JSON.parse(res.data).forEach(row => {names += `id: ${row.id}, name: ${row.name}\n`});
+       
+        res.data.forEach(row => {names += `id: ${row.id}, name: ${row.name}\n`});
+       
+        return names
     } catch (err) {
         console.log(err);
+        return '';
     }
 }
 
@@ -27,8 +31,9 @@ const getSuggestion = async (question, answer) => {
     const names = await getNames();
     const prompt = 
     `Here's a list of (Thai) restaurant names and their ids. A client has answered a random question.
-    From the question and the client's answer, make a creative inference about which restaurant the client should choose.
-    
+    From the question and the client's answer, make a creative, funny and unexpected inference about which restaurant the client should choose.
+    Speak to client directly.
+
     Restaurants names and their ids:
     ${names}
 
@@ -48,6 +53,8 @@ const getSuggestion = async (question, answer) => {
         console.log(err);
     }
 }
+
+// getSuggestion('Do you like Pop music?', 'Nope').then(ans => console.log(ans))
 
 
 module.exports = getSuggestion;
